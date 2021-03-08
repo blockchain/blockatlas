@@ -22,7 +22,7 @@ import (
 
 const (
 	defaultPort       = "8420"
-	defaultConfigPath = "../../config.yml"
+	defaultConfigPath = "./config.yml"
 )
 
 var (

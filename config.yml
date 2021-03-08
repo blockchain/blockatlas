@@ -22,7 +22,7 @@ observer:
     url: amqp://localhost:5672
 
 postgres:
-  url: postgresql://user:pass@localhost/blockatlas?sslmode=disable
+  url: postgresql://joy:pass@localhost/blockatlas?sslmode=disable
   log: false
 
 consumer:
