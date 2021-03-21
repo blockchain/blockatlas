@@ -1,0 +1,85 @@
+resources:
+
+- name: blockatlas-docker-image
+  type: docker-image
+  source:
+    repository: eu.gcr.io/blockchain-internal/blockatlas
+    username: _json_key
+    password: ((docker-credentials))
+
+- name: notify
+  type: slack-notification
+  source:
+    url: ((slack_hook))
+
+- name: source-code
+  type: git
+  source:
+    private_key: ((private_key_blockatlas))
+    tag_filter: v*
+    uri: git@github.com:blockchain/blockatlas.git
+
+- name: go-image
+  type: docker-image
+  source:
+    repository: eu.gcr.io/blockchain-internal/blockchain_golang_1_15
+    username: _json_key
+    password: ((docker-credentials))
+    tag: latest
+
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: arbourd/concourse-slack-alert-resource
+
+jobs:
+- name: build
+  plan:
+  - in_parallel:
+    - get: blockatlas-docker-image
+      trigger: true
+      resource: source-code
+    - get: go-image
+      params:
+        save: true
+  - task: build-binary
+    image: go-image
+    config:
+      platform: linux
+      run:
+        user: root
+        path: /bin/bash
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          set -euo pipefail
+          export MAIN_DIR=${PWD}
+          cd app/
+          make build
+          cp -R bin/ $MAIN_DIR/build-output
+          cp ./Dockerfile $MAIN_DIR/build-output/
+
+      inputs:
+      - name: blockatlas-docker-image
+        path: app
+        optional: false
+      outputs:
+      - name: build-output
+  - in_parallel:
+    - put: blockatlas-docker-image
+      params:
+        load_base: go-image
+        build: build-output/
+        build_args:
+          REGISTRY: eu.gcr.io/blockchain-internal
+        tag: build-output/version.txt
+      on_success:
+        put: notify
+        params:
+          alert_type: success
+      on_failure:
+        put: notify
+        params:
+          alert_type: failed

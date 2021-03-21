@@ -14,7 +14,7 @@ COIN_GO_FILE := coin/coins.go
 GEN_COIN_FILE := coin/gen.go
 DOCKER_LOCAL_DB_IMAGE_NAME := test_db
 DOCKER_LOCAL_MQ_IMAGE_NAME := mq
-DOCKER_LOCAL_DB_USER :=user
+DOCKER_LOCAL_DB_USER :=joy
 DOCKER_LOCAL_DB_PASS :=pass
 DOCKER_LOCAL_DB := blockatlas
 
@@ -207,6 +207,16 @@ endif
 go-compile: go-get go-build
 
 go-build: go-build-api go-build-consumer go-build-parser
+
+
+TAG:=0.1
+
+build:
+	mkdir -p bin
+	mkdir -p build-output
+	@echo "  >  Building api binary..."
+	go build -o $(LDFLAGS) bin/blockatalas ./
+	echo "v$(TAG)" > $(MAIN_DIR)/build-output/version.txt
 
 docker-shutdown:
 	@echo "  >  Shutdown docker containers..."
