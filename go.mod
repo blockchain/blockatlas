@@ -1,4 +1,4 @@
-module github.com/trustwallet/blockatlas
+module github.com/blockchain/blockatlas
 
 go 1.15
 

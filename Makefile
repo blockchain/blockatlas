@@ -1,7 +1,7 @@
 #! /usr/bin/make -f
 
 # Project variables.
-PACKAGE := github.com/trustwallet/blockatlas
+PACKAGE := github.com/blockchain/blockatlas
 VERSION := $(shell git describe --tags 2>/dev/null || git describe --all)
 BUILD := $(shell git rev-parse --short HEAD)
 DATETIME := $(shell date +"%Y.%m.%d-%H:%M:%S")
@@ -207,16 +207,6 @@ endif
 go-compile: go-get go-build
 
 go-build: go-build-api go-build-consumer go-build-parser
-
-
-TAG:=0.1
-
-build:
-	mkdir -p bin
-	mkdir -p build-output
-	@echo "  >  Building api binary..."
-	go build -o $(LDFLAGS) bin/blockatalas ./
-	echo "v$(TAG)" > $(MAIN_DIR)/build-output/version.txt
 
 docker-shutdown:
 	@echo "  >  Shutdown docker containers..."
