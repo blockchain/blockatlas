@@ -220,15 +220,15 @@ start-docker-services: docker-shutdown
 
 go-build-api:
 	@echo "  >  Building api binary..."
-	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(API)/api ./cmd/$(API)
+	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/
 
 go-build-consumer:
 	@echo "  >  Building consumer binary..."
-	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(CONSUMER)/consumer ./cmd/$(CONSUMER)
+	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/
 
 go-build-parser:
 	@echo "  >  Building parser binary..."
-	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PARSER)/parser ./cmd/$(PARSER)
+	GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/
 
 go-generate:
 	@echo "  >  Generating dependency files..."

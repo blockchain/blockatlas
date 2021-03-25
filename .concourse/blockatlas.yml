@@ -16,7 +16,7 @@ resources:
   type: git
   source:
     private_key: ((private_key_blockatlas))
-    tag_filter: v*
+    branch: master
     uri: git@github.com:blockchain/blockatlas.git
 
 - name: go-image
