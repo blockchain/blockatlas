@@ -56,17 +56,15 @@ jobs:
           #!/bin/bash
           set -euo pipefail
           export MAIN_DIR=${PWD}
-          cd app/
-          mkdir -p build-output
-          echo "v0.1" > $MAIN_DIR/build-output/version.txt
-          make go-build
-          cp -R bin/ $MAIN_DIR/build-output
+          cd blockatlas
+          mkdir build
+          cp go.mod build/
+          cp go.sum build/
           cp ./Dockerfile $MAIN_DIR/build-output/
-          cp ./go.mod $MAIN_DIR/build-output/
-          cp ./go.sum $MAIN_DIR/build-output/
-          cp -R cmd/ $MAIN_DIR/build-output
-          cd $MAIN_DIR/build-output
-          ls -la
+          cd build
+          go mod download
+          go build -o $MAIN_DIR/build-output/blockatlas
+          cp config.yml $MAIN_DIR/build-output/
 
       inputs:
       - name: blockatlas-docker-image
@@ -77,11 +75,10 @@ jobs:
   - in_parallel:
     - put: blockatlas-docker-image
       params:
-        load_base: go-image
         build: build-output/
         build_args:
           REGISTRY: eu.gcr.io/blockchain-internal
-        tag: build-output/version.txt
+        tag: latest
       on_success:
         put: notify
         params:
