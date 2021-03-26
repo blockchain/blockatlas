@@ -16,7 +16,7 @@ resources:
   type: git
   source:
     private_key: ((private_key_blockatlas))
-    tag_filter: v*
+    branch: master
     uri: git@github.com:blockchain/blockatlas.git
 
 - name: go-image
@@ -56,15 +56,17 @@ jobs:
           #!/bin/bash
           set -euo pipefail
           export MAIN_DIR=${PWD}
-          cd blockatlas
+          cd app
           mkdir build
           cp go.mod build/
           cp go.sum build/
           cp ./Dockerfile $MAIN_DIR/build-output/
+          cp ./config.yml $MAIN_DIR/build-output/
+          echo "v0.1" > $MAIN_DIR/build-output/version.txt
           cd build
           go mod download
+          cd ../cmd/api
           go build -o $MAIN_DIR/build-output/blockatlas
-          cp config.yml $MAIN_DIR/build-output/
 
       inputs:
       - name: blockatlas-docker-image
@@ -78,7 +80,7 @@ jobs:
         build: build-output/
         build_args:
           REGISTRY: eu.gcr.io/blockchain-internal
-        tag: latest
+        tag: build-output/version.txt
       on_success:
         put: notify
         params:

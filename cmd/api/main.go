@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/trustwallet/blockatlas/internal/metrics"
+	"github.com/blockchain/blockatlas/internal/metrics"
 
 	golibsGin "github.com/trustwallet/golibs/network/gin"
 
@@ -15,7 +15,7 @@ import (
 	"github.com/trustwallet/blockatlas/config"
 	"github.com/trustwallet/blockatlas/db"
 	_ "github.com/trustwallet/blockatlas/docs"
-	"github.com/trustwallet/blockatlas/internal"
+	"github.com/blockchain/blockatlas/internal"
 	"github.com/trustwallet/blockatlas/platform"
 	"github.com/trustwallet/blockatlas/services/tokenindexer"
 )
