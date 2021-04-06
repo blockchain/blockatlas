@@ -9,19 +9,19 @@ import (
 
 	"github.com/trustwallet/golibs/network/middleware"
 
+	"github.com/blockchain/blockatlas/api"
+	"github.com/blockchain/blockatlas/internal"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
-	"github.com/trustwallet/blockatlas/api"
 	"github.com/trustwallet/blockatlas/config"
 	"github.com/trustwallet/blockatlas/db"
 	_ "github.com/trustwallet/blockatlas/docs"
-	"github.com/blockchain/blockatlas/internal"
 	"github.com/trustwallet/blockatlas/platform"
 	"github.com/trustwallet/blockatlas/services/tokenindexer"
 )
 
 const (
-	defaultPort       = "8420"
+	defaultPort       = "8080"
 	defaultConfigPath = "./config.yml"
 )
 
@@ -63,7 +63,6 @@ func main() {
 	api.SetupSwaggerAPI(engine)
 	api.SetupPlatformAPI(engine)
 	api.SetupMetrics(engine)
-
 	golibsGin.SetupGracefulShutdown(ctx, port, engine)
 	cancel()
 }

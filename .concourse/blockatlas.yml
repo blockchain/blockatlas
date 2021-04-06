@@ -66,7 +66,7 @@ jobs:
           cd build
           go mod download
           cd ../cmd/api
-          go build -o $MAIN_DIR/build-output/blockatlas
+          go build -o $MAIN_DIR/build-output/
 
       inputs:
       - name: blockatlas-docker-image
