@@ -24,6 +24,7 @@ func SetupPlatformAPI(router gin.IRouter) {
 
 	RegisterBatchAPI(router)
 	RegisterBasicAPI(router)
+	RegisterHealthAPI(router)
 }
 
 func SetupTokensIndexAPI(router gin.IRouter, instance tokenindexer.Instance) {

@@ -3,8 +3,8 @@ package api
 import (
 	"time"
 
+	"github.com/blockchain/blockatlas/api/endpoint"
 	"github.com/gin-gonic/gin"
-	"github.com/trustwallet/blockatlas/api/endpoint"
 	"github.com/trustwallet/blockatlas/pkg/blockatlas"
 	"github.com/trustwallet/blockatlas/platform"
 	"github.com/trustwallet/blockatlas/services/tokenindexer"
@@ -99,6 +99,10 @@ func RegisterBatchAPI(router gin.IRouter) {
 
 func RegisterBasicAPI(router gin.IRouter) {
 	router.GET("/", endpoint.GetStatus)
+}
+
+func RegisterHealthAPI(router gin.IRouter) {
+	router.GET("/healthz", endpoint.Health)
 }
 
 func RegisterTokensIndexAPI(router gin.IRouter, instance tokenindexer.Instance) {
