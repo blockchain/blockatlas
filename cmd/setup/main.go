@@ -5,9 +5,9 @@ import (
 	"github.com/trustwallet/golibs/network/middleware"
 	"github.com/trustwallet/golibs/network/mq"
 
+	"github.com/blockchain/blockatlas/internal"
 	log "github.com/sirupsen/logrus"
 	"github.com/trustwallet/blockatlas/db"
-	"github.com/trustwallet/blockatlas/internal"
 	"github.com/trustwallet/blockatlas/platform"
 )
 

@@ -17,9 +17,9 @@ import (
 	"github.com/trustwallet/blockatlas/config"
 	"github.com/trustwallet/blockatlas/services/subscriber"
 
+	"github.com/blockchain/blockatlas/internal"
 	log "github.com/sirupsen/logrus"
 	"github.com/trustwallet/blockatlas/db"
-	"github.com/trustwallet/blockatlas/internal"
 )
 
 const (

@@ -13,9 +13,9 @@ import (
 
 	"github.com/trustwallet/blockatlas/config"
 
+	"github.com/blockchain/blockatlas/internal"
 	log "github.com/sirupsen/logrus"
 	"github.com/trustwallet/blockatlas/db"
-	"github.com/trustwallet/blockatlas/internal"
 	"github.com/trustwallet/blockatlas/platform"
 	"github.com/trustwallet/blockatlas/services/parser"
 	"github.com/trustwallet/golibs/network/mq"

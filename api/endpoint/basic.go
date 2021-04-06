@@ -1,9 +1,10 @@
 package endpoint
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/trustwallet/blockatlas/internal"
 	"net/http"
+
+	"github.com/blockchain/blockatlas/internal"
+	"github.com/gin-gonic/gin"
 )
 
 func GetStatus(c *gin.Context) {

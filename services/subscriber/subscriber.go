@@ -3,7 +3,7 @@ package subscriber
 import (
 	"encoding/json"
 
-	"github.com/trustwallet/blockatlas/internal"
+	"github.com/blockchain/blockatlas/internal"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
