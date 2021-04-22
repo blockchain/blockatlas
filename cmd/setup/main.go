@@ -5,6 +5,8 @@ import (
 	"github.com/trustwallet/golibs/network/middleware"
 	"github.com/trustwallet/golibs/network/mq"
 
+	"os"
+
 	"github.com/blockchain/blockatlas/internal"
 	log "github.com/sirupsen/logrus"
 	"github.com/trustwallet/blockatlas/db"
@@ -27,7 +29,14 @@ func init() {
 	platform.Init(config.Default.Platform)
 
 	var err error
-	database, err = db.New(config.Default.Postgres.URL, config.Default.Postgres.Log)
+	var host = os.Getenv("DB_HOST")
+	var port = os.Getenv("DB_PORT")
+	var dbname = os.Getenv("DB_NAME")
+	var user = os.Getenv("DB_USERNAME")
+	var password = os.Getenv("DB_PASSWORD")
+	var url = "postgresql://" + user + ":" + password + "@" + host + ":" + port + "/" + dbname + "?sslmode=disable"
+	log.Info("db with url: " + url)
+	database, err = db.New(url, false)
 	if err != nil {
 		log.Fatal(err)
 	}
