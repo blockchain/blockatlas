@@ -3,8 +3,8 @@ services:
   api:
     container_name: api
     environment:
-      - POSTGRES_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
-      - POSTGRES_READ_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_READ_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
       - OBSERVER_RABBITMQ_URL=amqp://rabbit:5672
     build:
       context: .
@@ -19,8 +19,8 @@ services:
       args:
         - SERVICE=consumer
     environment:
-      - POSTGRES_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
-      - POSTGRES_READ_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_READ_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
       - OBSERVER_RABBITMQ_URL=amqp://rabbit:5672
     links:
       - rabbit
@@ -33,8 +33,8 @@ services:
       args:
         - SERVICE=parser
     environment:
-      - POSTGRES_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
-      - POSTGRES_READ_URL=postgresql://joy:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
+      - POSTGRES_READ_URL=postgresql://blockatlas:pass@postgres/blockatlas?sslmode=disable
       - OBSERVER_RABBITMQ_URL=amqp://rabbit:5672
     links:
       - rabbit
@@ -56,7 +56,7 @@ services:
     container_name: postgres
     image: postgres
     environment:
-      - POSTGRES_USER=joy
+      - POSTGRES_USER=blockatlas
       - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=blockatlas
     ports:
