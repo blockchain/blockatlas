@@ -26,7 +26,6 @@ func init() {
 	platform.Init(config.Default.Platform)
 
 	var err error
-	log.Infof("Connecting to database at %s", config.Default.Postgres.URL)
 	database, err = db.New(config.Default.Postgres.URL, config.Default.Postgres.Log)
 	if err != nil {
 		log.Fatal(err)
