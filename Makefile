@@ -14,7 +14,7 @@ COIN_GO_FILE := coin/coins.go
 GEN_COIN_FILE := coin/gen.go
 DOCKER_LOCAL_DB_IMAGE_NAME := test_db
 DOCKER_LOCAL_MQ_IMAGE_NAME := mq
-DOCKER_LOCAL_DB_USER :=joy
+DOCKER_LOCAL_DB_USER :=blockatlas
 DOCKER_LOCAL_DB_PASS :=pass
 DOCKER_LOCAL_DB := blockatlas
 
